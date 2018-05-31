@@ -11,6 +11,62 @@ robot.config["PORT"] = config.PORT
 robot.config["APP_ID"] = config.APP_ID
 robot.config["APP_SECRET"] = config.APP_SECRET
 
+client = robot.client
+
+#公众号底栏菜单
+client.create_menu({
+    "button": [
+        {
+            "name": "知了",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "历史文章",
+                    "url": ""
+                },
+                {
+                    "type": "view",
+                    "name": "今日新闻",
+                    "url": ""
+                }
+            ]
+        },
+        {
+            "name": "开源",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "Github",
+                    "url": ""
+                },
+                {
+                    "type": "view",
+                    "name": "码云",
+                    "url": ""
+                }
+            ]
+        },
+        {
+            "name": "关于",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "关于我",
+                    "url": ""
+                },
+                {
+                    "type": "view",
+                    "name": "合作",
+                    "url": ""
+                }
+            ]
+        }
+    ]
+})
+
+
+
+
 @robot.subscribe
 def subscribed(message):
     '''订阅后欢迎语'''
