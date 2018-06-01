@@ -2,12 +2,10 @@ from werobot import WeRoBot
 import time
 import requests
 
-import config
-from utils import tencentai
+from app import config
+from app.utils import tencentai
 
 robot = WeRoBot(token=config.TOKEN)
-robot.config["HOST"] = config.HOST
-robot.config["PORT"] = config.PORT
 robot.config["APP_ID"] = config.APP_ID
 robot.config["APP_SECRET"] = config.APP_SECRET
 
@@ -94,7 +92,3 @@ def echo(message):
         text = config.ErrorText + "\n" + result["msg"]
         return text
     return result["data"]["answer"]
-
-
-
-robot.run()
