@@ -2,6 +2,10 @@
 配置文件
 '''
 
+#NATAPP 域名
+DOMAIN = "http://i6wft6.natappfree.cc"
+
+
 #主机
 HOST = "127.0.0.1"
 PORT = 8082

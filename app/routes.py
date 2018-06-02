@@ -1,7 +1,7 @@
 from flask import request, render_template, jsonify, abort, send_from_directory
 
 from app import app
-from app.spider import news
+from app.spider import news, github
 
 @app.route("/", methods=["GET"])
 def index():
@@ -12,7 +12,7 @@ def index():
 def getnews():
     '''爬虫获取实时新闻'''
     data = news.SinaNews()
-    return render_template("list.html", data=data)
+    return render_template("articlelist.html", data=data)
 
 
 @app.route("/news/detail", methods=["GET"])
@@ -20,7 +20,7 @@ def nesdetail():
     '''获取新闻详情'''
     # target_url = request.args.get("src")
     # title, cover, content = news.SinaNewsDetail(target_url)
-    # return render_template("detail.html", title=title, content=content, cover=cover)
+    # return render_template("articledetail.html", title=title, content=content, cover=cover)
     #页面暂时直接跳转到原页面
     pass
 
@@ -31,9 +31,10 @@ def getarticles():
     pass
 
 @app.route("/github", methods=["GET"])
-def github():
+def githubTrending():
     '''爬虫获取github今日最热开源项目'''
-    pass
+    data = github.githubproject()
+    return render_template("projectlist", data=data)
 
 @app.route("/oschina", methods=["GET"])
 def oschina():

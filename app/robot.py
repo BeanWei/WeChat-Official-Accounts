@@ -20,12 +20,12 @@ client.create_menu({
                 {
                     "type": "view",
                     "name": "历史文章",
-                    "url": "/news"
+                    "url": config.DOMAIN + "/news"
                 },
                 {
                     "type": "view",
                     "name": "今日新闻",
-                    "url": "/news"
+                    "url": config.DOMAIN + "/news"
                 }
             ]
         },
@@ -35,7 +35,7 @@ client.create_menu({
                 {
                     "type": "view",
                     "name": "Github",
-                    "url": "https://github.com/BeanWei"
+                    "url": "https://github.com/trending"
                 },
                 {
                     "type": "view",
