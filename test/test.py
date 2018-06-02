@@ -2,17 +2,33 @@ import time
 import hashlib 
 import execjs
 import requests
+import re
+import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 
-def getsignature():
-    '''计算今日头条_signature参数'''
-    req = requests.Session()
-    # js获取目的
-    jsurl = 'https://s3a.pstatp.com/toutiao/resource/ntoutiao_web/page/home/whome/home_da59924.js'
-    resp = req.get(jsurl)
-    ctx = execjs.get().compile((resp.content).decode("utf-8").encode("gbk"))
-    js = 'window.TAC.sign(1)'
-    signature = ctx.call(js)
-    print(signature)
-    return signature
+from fake_useragent import UserAgent
+ua = UserAgent()
 
-getsignature()
+
+def SinaNews():
+    '''获取新浪科技新闻列表'''
+    json_url = "http://cre.mix.sina.com.cn/api/v3/get?callback=jQuery111203503056714736408_1527899632664&cateid=1z&cre=tianyi&mod=pctech"
+    headers = {
+        "User-Agent": ua.random
+    }
+    response = requests.get(json_url, headers=headers).text
+    jsonvalues = eval(re.findall(r'{"data":(.*?),"status"', response)[0])
+    data = []
+    for i in jsonvalues:
+        article = {}
+        try:
+            article["title"] = i["title"]           #新闻标题
+            article["intro"] = i["intro"]           #新闻摘要
+            article["surl"] = i["surl"]             #新闻链接
+            data.append(article)
+        except:
+            continue
+    return data
+
+SinaNews()

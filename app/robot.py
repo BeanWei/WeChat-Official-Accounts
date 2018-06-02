@@ -20,12 +20,12 @@ client.create_menu({
                 {
                     "type": "view",
                     "name": "历史文章",
-                    "url": ""
+                    "url": "/news"
                 },
                 {
                     "type": "view",
                     "name": "今日新闻",
-                    "url": ""
+                    "url": "/news"
                 }
             ]
         },
@@ -35,12 +35,12 @@ client.create_menu({
                 {
                     "type": "view",
                     "name": "Github",
-                    "url": ""
+                    "url": "https://github.com/BeanWei"
                 },
                 {
                     "type": "view",
                     "name": "码云",
-                    "url": ""
+                    "url": "https://github.com/BeanWei"
                 }
             ]
         },
@@ -50,12 +50,12 @@ client.create_menu({
                 {
                     "type": "view",
                     "name": "关于我",
-                    "url": ""
+                    "url": "https://github.com/BeanWei"
                 },
                 {
                     "type": "view",
                     "name": "合作",
-                    "url": ""
+                    "url": "https://github.com/BeanWei"
                 }
             ]
         }

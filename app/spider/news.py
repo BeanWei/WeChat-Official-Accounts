@@ -2,8 +2,45 @@ import time
 import hashlib 
 import execjs
 import requests
+import re
+from fake_useragent import UserAgent
+ua = UserAgent()
 
-import common
+from app.spider import common
+
+def SinaNews():
+    '''获取新浪科技新闻列表'''
+    json_url = "http://cre.mix.sina.com.cn/api/v3/get?callback=jQuery111203503056714736408_1527899632664&cateid=1z&cre=tianyi&mod=pctech"
+    headers = {
+        "User-Agent": ua.random
+    }
+    response = requests.get(json_url, headers=headers).text
+    jsonvalues = eval(re.findall(r'{"data":(.*?),"status"', response)[0])
+    data = []
+    for i in jsonvalues:
+        article = {}
+        try:
+            article["title"] = i["title"]           #新闻标题
+            article["intro"] = i["intro"]           #新闻摘要
+            article["surl"] = i["surl"]             #新闻链接
+            article["mthumbs"] = i["mthumbs"][0]    #新闻封面
+            data.append(article)
+        except:
+            continue
+    return data
+
+
+def SinaNewsDetail(sina_surl):
+    '''获取新浪新闻详情'''
+    response = requests.get(sina_surl)
+    title = re.findall(r'<h1 class="art_tit_h1">(.*?)</h1>', response.text)[0]
+    cover = re.findall(r'<img class="sharePic hide" src="(.*?)"/>', response.text)[0]
+    content = re.findall(r'<img class="sharePic hide" src=.*?/>(.*?)<script type="text/javascript">', response.text, re.S|re.M|re.I)[0]
+    return title, cover, content
+
+
+
+#TODO:分析今日头条的_signature参数
 
 def getNews():
     json_url = "https://www.toutiao.com/api/pc/feed/?category=news_tech&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=%s&cp=%s&_signature=%s"
@@ -58,4 +95,5 @@ def getsignature():
     print(signature)
     return signature
 
-getsignature()
+
+

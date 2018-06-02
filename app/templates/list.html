@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python Go</title>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.2/weui.min.js"></script>
+    <script type="text/javascript">
+        weui.alert('alert');
+    </script> 
+</head>
+<body>
+    <div class="weui-cells__title">「今天发生了什么」</div>
+    {% for d in data %}
+    
+    <div class="weui-cells">   
+        <p>{{ d.title }}</p>
+        <a href="{{ d.surl }}" class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd"><img src="{{d.mthumbs}}" alt="cover" style="width:135px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__ft">{{ d.intro }}</div>
+        </a>
+    </div>
+    {% endfor %}
+    <!-- 列表组底部说明文字 -->
+    <div class="weui-cells__tips">广告区域</div>
+</body>
+</html>

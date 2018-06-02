@@ -10,3 +10,5 @@ app.add_url_rule(
     view_func = make_view(robot),
     methods = ["GET", "POST"]
 )
+
+from .routes import *
